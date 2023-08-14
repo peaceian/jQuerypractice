@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery練習</title>
+    
+    <style>
+        body {display:block;margin: 0;word-wrap: none;word-spacing: 5px;}/*CSS會將jQuery視為文字表達出來*/
+        
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    
+</head>
+<body>
+    <p id="test" class="test">alert</p>
+    <p>選擇元素p</p>
+    <p class="class">選擇類別.class</p>
+    <p id="p">選擇id='p'</p>
+    <p class="group 1" id="group 1">選擇群組group1</p>
+    <p class="group 2" id="group 2">選擇群組group2</p>
+    <ul>
+        <li>子代選擇器，尋找符合ul>li的所有li</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <h1 id="child">後代選擇器，符合的元素及id</h2>
+    <h2>抬頭</h2>
+    <p>兄弟或相鄰選擇器'h2+p'</p>
+    <p>h2段落p選擇第一個</p>
+    <h3>抬頭</h3>
+    <p>同層全體選擇器'h3~p'</p>
+    <p>h3段落p選擇全體</p>
+    <button id="btn">.on(event[,selector]or[,{:}],function(){event();}); </button>
+    <script>
+        $("#test").ready(function(){alert("Hello World !");});
+        $('#test').ready(function(){alert("Hello World");});
+        $('#test').ready(function(){alert('hello ');});
+        jQuery('#test').ready(function(){alert('Use the jQuery be an ahead.');});//open('https://youtube.com');});//$完整語法jQuery
+        $('*').css({'background-color':'pink','width':'fit-content','padding':'10px'});//所有元素
+        $('p').css('font-family','Time Roman');//選擇元素
+        $('.class').css('color','yellow');//選擇類別.class
+        $('#p').css('text-decoration','underline');//選擇id
+        $('.group,.gr').css('color','blue');//測試完只能用.class，符合其一即可
+        $('ul>li').css('color','skyblue');//所有符合ul>li的li
+        $('h1,#child').css('background-color','lightpink');//目標元素中要有id
+        $('h2+p').css('background-color','yellow');
+        $('h3~p').css('background-color','ivory');
+        $('img').attr({width:"600",height:"400"});
+        $("#btn").on("click",{"name":"Nanama"},function(e){alert(e.data.name+"按了按鈕!");});//on()事件
+    
+    </script>   
+    <hr><hr>
+    
+
+    <h1>篩選選擇器</h1>
+    
+    <h2>1.基本篩選器</h2>
+    <p>$("div:not('#selector')")除此以外的元素</p>
+    <p>$("div:first")第一個元素</p>
+    <p>$("div:last")最後一個元素</p>
+    <p>$("div:odd")奇數元素</p>
+    <p>$("div:even")偶數元素</p>
+    <p>$("p:eq(2)")索引值等於index的元素</p>
+    <p>$("p:gt(2)")索引值大於index的元素</p>
+    <p>$("p:lt(2)")索引值小於index的元素</p>
+    <p>$(":header")所有h1~h6的元素</p>
+    <p>$(":focus")目前聚焦的元素</p>
+    <hr><hr>
+    <h2>2.內容篩選器</h2>
+    <p>$(":contains("text")")內容包含text的元素</p>
+    <p>$(":empty")空元素(沒有孩子)</p>
+    <p>$(":parent")非空元素(有孩子)</p>
+    <p>$("div:has("li")")內容包含某個元素</p>
+    <hr><hr>
+    <h2>3.可見篩選器</h2>
+    <p>$("h1:hidden")隱藏的元素</p>
+    <p>$("table:visible")可見的元素</p>
+    <hr><hr>
+    <h2>4.屬性篩選器</h2>
+    <p>$("[href="#"]")有該屬性attribute的元素$([attribute=value])</p>
+    <p>$("[href!="#"]")有該屬性但沒有該屬性質的元素(不侷限值的意思)$([attribute!=value])</p>
+    <p>$("[name^="user"]")有該屬性且有該屬性值開頭的元素$([attribute^=value])</p>
+    <p>$("[href$=".png"]")有該屬性且有該屬性值結尾的元素$([attribute$=value])</p>
+    <p>$("[name*="wang"]")有該屬性且有包含該屬性值字串的元素$([attribute*=value])</p>
+    <p>$("[class|="box"]")有該屬性值或是以-連接的元素$([attribute|=value])</p>
+    <p>$("[class~="username"]")在多個屬性質中存在該屬性值$([attribute~=value])</p>
+    <p>$("[class="first"][class="second"]")符合所有選擇器的元素$([attribute1=value][attribute2=value])</p>
+    <hr><hr>
+    <h2>5.Child篩選器(CSS選擇器)</h2>
+    <p>:first-child只能選擇父元素的第一個元素$("p:first-child")</p>
+    <p>:last-child只能選擇父元素最後一個子元素$("p:last-child")</p>
+    <p>:nth-child(n)選擇父元素之下第n個子元素$("li:nth-child(2n+1)")</p>
+    <p>:first-of-type元素的同種類元素之中第一個元素$("p:first-of-type")</p>
+    <p>:last-of-type元素的同種類元素之中最後一個元素$("p:last-of-type")</p>
+    <p>:nth-of-type(n)元素的同種類元素之中第n個元素$("li:nth-of-type(2)")</p>
+    <p>:nth-last-child(n)元素之下倒數第n個子元素$("li:nth-last-child(2)")</p>
+    <p>:nth-last-of-type(n)元素的同種類元素之中，倒數第n個子元素$("li:nth-last-of-type(2)")</p>
+    <p>:only-child元素之下僅有一個子元素$("p:only-child")</p>
+    <p>:only-of-type元素的同種類元素之中，僅有一個的子元素$("p:only-of-type")</p>
+    <hr><hr>
+    <h2>6.表單篩選器(html表單元素)</h2>
+    <p>:input所有input元素$(":input")</p>
+    <p>:text所有text元素$(":text")</p>
+    <p>:password所有password元素$(":password")</p>
+    <p>:radio所有radio元素$(":radio")</p>
+    <p>:checkbox所有checkbox元素$(":checkbox")</p>
+    <p>:submit所有submit元素$(":submit")</p>
+    <p>:button所有button元素$(":button")</p>
+    <p>:reset所有reset元素$(":reset")</p>
+    <p>:image所有image元素$(":image")</p>
+    <p>:file所有file元素$(":file")</p>
+    <p>:checked所有被選取的radio button或checkbox元素$(":checked")</p>
+    <p>:selected所有下拉式選單裡被選擇的元素$(":selected")</p>
+    <p>:enabled所有啟用元素$(":enabled")</p>
+    <p>:disabled所有停用元素$(":disabled")</p>
+    <hr><hr><hr>
+    <h1>CSS與DOM的處理(對元素動作)</h1>
+    <h2>1.變更及取得元素的方法</h2>
+    <p>.html()，等同innerHTML</p>
+    <p>.text()，等同textContent和innerText</p>
+    <p>.replaceWith()，置換元素的內容</p>
+    <p>.remove()，移除指定元素</p>
+    <p>.empty()，移除元素的所有子節點</p>
+    <p>.prepend()，在指定元素的開頭插入內容，a.prepend(b)，將b加在a前</p>
+    <p>.append()，在指定元素的最後插入內容，a.append(b)，將b加在a後</p>
+    <p>.val()，設定與查詢HTML表單元素value元素，等同value</p>
+    <p>.before()，在指定元素同層級的上方加入HTML元素</p>
+    <p>.after()，在指定元素同層級的下方加入HTML元素</p>
+    <p>.clone()，複製所選元素，包含子節點、文本、屬性</p>
+    <p>.wrap()，將指定的元素包覆在每個選定元素周圍</p>
+    <p>.wrapAll()，將指定的元素前後加上對應的HTML元素(多個元素一次加入)</p>
+    <hr><hr><hr>
+    <h2>2.存取元素的屬性值(修飾元素)</h2>
+    <p>.attr()，取出及設定屬性，單個$("img").attr("width","600")，多個$("img").attr({width:"600",height:"400"})</p>
+    <p>.removeAttr()，移除屬性。$("a").removeAttr("target")</p>
+    <p>.addClass()，新增一個或多個類別(不會覆蓋移除原有的class)，只做增加類別，新增多個類別時使用空格分隔。例如$("h1:first").addClass("intro note")</p>
+    <p>.removeClass()，僅移除類別，多類別使用空格分隔，如果沒有指定，將刪除所有類別。$("h1").removeClass("intro")</p>
+    <p>.css()，取出CSS樣式：.css("color")。設定CSS樣式：$("h1").css("color","#FFF")。設定多個CSS樣式：$("h1").css({"color":"#FFF","background-color":"#FF0"});</p>
+    <p>.toggleClass()，開關CSS樣式，如增加或移除class=main。$("p").toggleClass("main");</p>
+    <hr><hr><hr>
+    <h1>事件</h1>
+    <h2>1.事件的類型</h2>
+    <p>.ready()，DOM載入完成後(不等待其他資源載入)觸發該事件。</p>
+    <h2>2.滑鼠事件</h2>
+    <p>.click()，設定元素被點擊時觸發該事件。</p>
+    <p>.dblclick()，點兩下。</p>
+    <p>.hover()，設定滑鼠停留元素上時觸發該事件。</p>
+    <p>.mouseover()，設定元素移入、移出時觸發該事件。</p>
+    <p>.mouseout()，設定滑鼠移出元素時觸發該事件。</p>
+    <p>.mouseenter()，設定滑鼠停在元素上時觸發該事件(包含範圍內的子元素)。</p>
+    <p>.mouseleave()，設定滑鼠移出元素上時觸發該事件(包含範圍內的子元素)。</p>
+    <p>.mousedown()，設定元素被按下時觸發該事件。</p>
+    <p>.mousemove()，設定滑鼠在元素上方移動時觸發該事件。</p>
+    <p>.mouseup()，設定滑鼠離開元素上方時觸發該事件。</p>
+    <h2>瀏覽器事件</h2>
+    <p>.resize()，設定瀏覽器視窗大小改變時觸發該事件。</p>
+    <p>.scroll()，設定瀏覽器視窗被捲動時觸發該事件。</p>
+    <h2>鍵盤事件</h2>
+    <p>.kewydown()，按下鍵盤按鍵時觸發該事件。</p>
+    <p>.keypress()，鍵盤輸入時觸發事件。</p>
+    <p>.keyup()，放開按鍵時觸發事件。</p>
+    <h2>表單事件</h2>
+    <p>.submit()，送出表單資料時觸發該事件。</p>
+    <p>.change()，當表單元素內容改變時觸發該事件。</p>
+    <p>.focus()，當表單元素取得焦點時觸發該事件。</p>
+    <p>.focusin()，當表單元素取得焦點時觸發該事件(包含子元素)。</p>
+    <p>.blur()，當焦點離開表單元素時觸發該事件。</p>
+    <p>.focusout()，當焦點離開表單元素時觸發該事件。(包含子元素)。</p>
+    <p>.select()，表單元素的值被選取時觸發該事件。</p>
+    <p>.reset()，當重設表單時觸發該事件。</p>
+    <h2>事件處理</h2>
+    <h3>指定選取對象、指派事件、傳遞一個函式，意即「是誰?在什麼時候?做了什麼事情?」</h3>
+    <p>使用事件名稱直接觸發，例：$("p").click(function{$(this).css("color","red");});</p>
+    <p>不帶有參數的事件，觸發所有段落的click事件：$("p").click();</p>
+    <h3>使用on()方法觸發</h3>
+    <p>on()方法是將某個選擇器元素一次全部載入相同的事件jQuery，語法：</p>
+    <b>.on(events[,selector][,data],handler)</b>
+    <p>選擇器省略時，事件處理函式稱為<u>直接綁定</u>會發生在選定的元素上，也就是呼叫該事件的元素。如將table與td載入click事件：</p>
+    <p><b>$("table td").on("click",function(e){alert($(this).html();)});</b></p>
+    <p>提供選擇器參數時，事件處理程序稱為<u>委派綁定</u>，事件不被綁定元素所使用，只對綁定元素的後代選擇器使用，委派綁定優點是可以處理來自後代元素的事件，
+    也就是程式後來產生的後代DOM元素。</p>
+    <p><b>$("table").on("click","td",function(e){alert($(this).html());});</b></p>
+    <p>on()可以多個事件綁定一個事件處理函式，各事件類型以<b>空格</b>隔開</p>
+    <p><b>$("#btn").on("click mouseover",function(e){alert("你按了按鈕!");});</b></p>
+    <p>on()的第三個參數，可以用來傳資料到事件處理函式，在呼叫函式中用<b>e.data.</b>屬性名稱取值</p>
+    <p><b>$("#btn").on("click",{"name":"Nana"},function(e){alert(e.data.name+"按了按鈕!");});</b></p>
+    <h2>移除事件處理函式</h2>
+    <p>移除事件處理函式時，可以使用off()，移除元素的所有事件</p>
+    <p>$("h1").off()</p>
+    <p>$("h1").off("click")</p>
+    <p>$("h1").off("click","#demo")</p><hr><hr><hr>
+    <h1 id="bg-text" style="border:solid;width:fit-content">UPDOWN</h1><!--<button id="stop">stop</button>-->
+    <script>
+        $(document).ready(function(){
+            $("#bg-text").on({
+                mouseover:function(){//有兩個用冒號
+                    $(this).css({"color":"yellow","background-color":"blue"});
+                    $(this).text("Bonjour! NANA").slideUp(3000).slideDown(3000);
+                },
+                mouseleave:function(){
+                    $(this).css({"color":"#ffffff","background-color":"gray"});
+                    $(this).text("NANA PARIS!").slideUp(3000).slideDown(3000);//兩次上下後停止
+                }
+            });
+        });
+        //$("#bg-text").off("click","#stop");
+    </script>
+    <hr><hr><hr>
+    <div id="one">
+        <h1>這是標題，按鈕新增元素</h1>
+    </div>
+    <button id="button1">click to add new element</button>
+    <script>
+        $("#button1").click(function(){$("<p>增加p元素</p>").appendTo("#one");});//增加的元素在語法中決定
+    </script>
+    <hr><hr><hr>
+    <div id="div1" style="width:80px;height:80px;background-color: red;"></div>
+    <div id="div2" style="width:80px;height:80px;background-color: green;"></div>
+    <div id="div3" style="width:80px;height:80px;background-color: blue;"></div>
+    <br><br><br>
+    <button id="button2">button</button>
+    <script>
+        $(document).ready(function(){$("#button2").click(function(){$("#div1").fadeToggle(1000);
+                                                                    $("#div2").fadeToggle(2000);
+                                                                    $("#div3").fadeToggle(3000);});//按一次淡入，再按一次淡出
+                                     $("#button2").click(function(){$("#div1").fadeToggle(1000);
+                                                                    $("#div2").fadeToggle(2000);
+                                                                    $("#div3").fadeToggle(3000);});//同樣的語法再一次就變成直接淡入淡出
+                                                                });
+    </script>
+    <br><br><br>
+    
+    <div style="background:#98bf21;height:100px;width:100px;position: relative;" id="animate1">Hello</div>
+    <br>
+    <button id="button3">動畫</button>
+    <script>
+        $(document).ready(function(){$("#button3").click(function(){
+            var div=$("#animate1");
+            div.animate({paddingRight:"150px"},"slow").animate({paddingBottom:"150px"},"slow");
+            div.animate({fontSize:"5em"},"2000").animate({right:"hide"}).animate({left:"100px"}).animate({height:"show"}).animate({bottom:"200px"}).animate({left:"600px"});
+        });});
+    </script>
+
+
+
+
+
+    
+</body>
+</html>
